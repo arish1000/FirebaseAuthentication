@@ -1,0 +1,11 @@
+.container {
+    .root {
+        text-transform: none;
+        background-color: goldenrod;
+        color: white;
+
+        &:hover {
+            background-color: goldenrod;
+        }
+    }
+}

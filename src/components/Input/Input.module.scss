@@ -1,0 +1,22 @@
+ .container {
+     .root {
+         width: 100%;
+     }
+     .input_root {
+         &:hover {
+             .input_notchedOutline {
+                 border-color: goldenrod;
+             }
+         }
+     }
+     .input_notchedOutline {}
+
+     .input_focused {
+         .input_notchedOutline {
+             border-color: goldenrod !important;
+             border-width: 2px !important;
+         }
+     }
+
+    
+ }

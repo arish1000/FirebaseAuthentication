@@ -1,0 +1,54 @@
+@import '../../styles/variables.scss';
+
+.container {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh);
+
+  .card_main {
+    width: 300px;
+    height: 400px;
+    background-color: whitesmoke;
+    border: 1px solid whitesmoke;
+    box-shadow: 0 2px 5px 1px rgba(64,60,67,.16);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center ;
+    padding: 20px;
+    .logo_container {
+        margin-top: 15px;
+        margin-bottom: 10px;
+        .logo_img {
+            width: 112px;
+            height: 112px;
+        }
+    }
+
+    .email_input_container {
+        width: 100%;
+
+    }
+
+    .password_input_container {
+        width: 100%;
+
+    }
+
+    .login_btn_container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .login_btn {
+            padding: 8px 30px;
+        }
+    }
+
+  }
+  
+}
