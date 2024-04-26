@@ -1,0 +1,14 @@
+@import "../../styles/variables.scss";
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: whitesmoke;
+  box-shadow: 2px 2px 5px 1px rgba(64, 60, 67, 0.16);
+
+  .heading {
+    cursor: default;
+  }
+}

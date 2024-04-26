@@ -1,0 +1,44 @@
+@import "../../styles/variables.scss";
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .product_form {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+
+    .main_heading {
+      width: 100%;
+      font-family: $font-family-inter;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .product_name {
+      width: 100%;
+    }
+
+    .product_category {
+      width: 100%;
+    }
+
+    .product_quantity {
+      width: 100%;
+    }
+
+    .add_btn {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+  }
+}

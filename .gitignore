@@ -1,0 +1,38 @@
+# Dependency directories
+node_modules/
+# Directory used by npm 5+ to store temporary files
+.npm/
+
+# Build files
+build/
+dist/
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Log files
+log/
+logs/
+*.log.*
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Editor directories and files
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
