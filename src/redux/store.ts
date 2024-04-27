@@ -3,9 +3,11 @@ import userReducer from "./reducers/userReducer";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import headerReducer from "./reducers/headerReducer";
+import productsReducer from "./reducers/productsReducer";
 
 const combinedReducer = combineReducers({
   user: userReducer,
+  products: productsReducer,
   header: headerReducer,
 });
 

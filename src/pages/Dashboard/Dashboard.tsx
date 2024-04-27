@@ -9,11 +9,7 @@ const Dashboard = () => {
   const { setTitle } = useHeader();
   const { logout } = useLogout();
   setTitle("Dashboard");
-  return (
-    <div className={classes.container}>
-      <div></div>
-    </div>
-  );
+  return <div className={classes.container}></div>;
 };
 
 export default Dashboard;

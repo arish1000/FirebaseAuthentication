@@ -2,19 +2,16 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig  } from '../helpers';
 import { getAuth } from "firebase/auth";
 import { useState } from 'react';
+import {getFirestore} from "firebase/firestore"
+
+
+const firebaseApp = initializeApp(firebaseConfig );
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
 
 const useFirebase = () => {
-  const [firebaseApp, setFirebaseApp] = useState<any>(null);
-  const [auth, setAuth] = useState<any>(null);
-
-  if(!firebaseApp){
-    const app = initializeApp(firebaseConfig );
-    setFirebaseApp(app);
-    const auth = getAuth(app);
-    setAuth(auth);
-  }
   
-  return { auth }
+  return { firebaseApp, auth, db }
 }
 
 export default useFirebase;

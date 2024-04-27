@@ -1,4 +1,10 @@
 @import "../../styles/variables.scss";
 
-.main {
+.products_container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
 }

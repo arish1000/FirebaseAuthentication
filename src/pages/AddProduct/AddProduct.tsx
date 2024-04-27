@@ -1,29 +1,59 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import classes from "./AddProduct.module.scss";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import useHeader from "../../utils/hooks/useHeader";
+import { collection } from "firebase/firestore";
+import useFirebase from "../../utils/hooks/useFirebase";
+import { firebaserServices } from "../../services/firebaseServices/firebaseServices";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const { setTitle } = useHeader();
+  const navigate = useNavigate();
+  const [isAddingProduct, setIsAddingProduct] = useState(false);
+  const formRef = useRef<any>();
+  const { db } = useFirebase();
   setTitle("Add Product");
   const handleSubmit = (values: any) => {
-    console.log("values==>", values);
+    setIsAddingProduct(true);
+    const product_details = {
+      ...values,
+    };
+    const productCollection = collection(db, "Products");
+    firebaserServices
+      .addProduct(productCollection, product_details)
+      .then((res) => {
+        console.log("res=>", res);
+        if (formRef.current) {
+          formRef.current.resetForm();
+          navigate("/products/all");
+        }
+      })
+      .catch((err) => {
+        console.log("err", err);
+      })
+      .finally(() => {
+        setIsAddingProduct(false);
+      });
   };
 
   return (
     <Formik
+      innerRef={formRef}
       initialValues={{
-        Product_Name: "",
-        Product_Category: "",
-        Stock_Quantity: "",
+        name: "",
+        category: "",
+        quantity: "",
+        price: "",
       }}
       validationSchema={Yup.object().shape({
-        Product_Name: Yup.string().required("This is required"),
-        Product_Category: Yup.string().required("This is required"),
-        Stock_Quantity: Yup.string().required("This is required"),
+        name: Yup.string().required("This is required"),
+        category: Yup.string().required("This is required"),
+        quantity: Yup.string().required("This is required"),
+        price: Yup.string().required("This is required"),
       })}
       onSubmit={handleSubmit}
     >
@@ -37,11 +67,11 @@ const AddProduct = () => {
                 <div className={classes.product_name}>
                   <Input
                     type="text"
-                    name="Product_Name"
+                    name="name"
                     placeholder="Enter Name..."
-                    value={values?.Product_Name}
-                    error={errors?.Product_Name}
-                    helperText={errors?.Product_Name}
+                    value={values?.name}
+                    error={errors?.name}
+                    helperText={errors?.name}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -49,11 +79,11 @@ const AddProduct = () => {
                 <div className={classes.product_category}>
                   <Input
                     type="text"
-                    name="Product_Category"
+                    name="category"
                     placeholder="Enter Category..."
-                    value={values?.Product_Category}
-                    error={errors?.Product_Category}
-                    helperText={errors?.Product_Name}
+                    value={values?.category}
+                    error={errors?.category}
+                    helperText={errors?.category}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -61,17 +91,31 @@ const AddProduct = () => {
                 <div className={classes.product_quantity}>
                   <Input
                     type="text"
-                    name="Stock_Quantity"
+                    name="quantity"
                     placeholder="Enter Stock Quantity..."
-                    value={values?.Stock_Quantity}
-                    error={errors?.Stock_Quantity}
-                    helperText={errors?.Product_Name}
+                    value={values?.quantity}
+                    error={errors?.quantity}
+                    helperText={errors?.quantity}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </div>
+                <div className={classes.product_price}>
+                  <Input
+                    type="text"
+                    name="price"
+                    placeholder="Enter Price..."
+                    value={values?.price}
+                    error={errors?.price}
+                    helperText={errors?.price}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
                 </div>
                 <div className={classes.add_btn}>
-                  <Button type="submit">Add Product</Button>
+                  <Button type="submit">
+                    {isAddingProduct ? "Adding..." : "Add Product"}
+                  </Button>
                 </div>
               </div>
             </div>
