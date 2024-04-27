@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useHeader from "../../utils/hooks/useHeader";
 import classes from "./Product.module.scss";
 import Button from "../../components/Button/Button";
@@ -12,6 +12,7 @@ import { Form, Formik } from "formik";
 
 const Product = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const formRef = useRef<any>(null);
   const { db } = useFirebase();
   const products = useSelector((state: any) => state?.root?.products?.products);
@@ -41,9 +42,13 @@ const Product = () => {
 
   const handleUpdate = (values: any) => {
     if (isEditMode) {
-      let data = values;
-      delete data.id;
-      const productRef = doc(db, "Products", `${product?.id}`);
+      const data = {
+        name: values?.name,
+        category: values?.category,
+        price: values?.price,
+        quantity: values?.quantity,
+      };
+      const productRef = doc(db, "Products", `${values?.id}`);
       firebaserServices.updateProduct(productRef, data).then((res) => {
         console.log("res", res);
         setIsEditMode(false);
@@ -51,6 +56,19 @@ const Product = () => {
     } else {
       setIsEditMode(true);
     }
+  };
+
+  const deleteProduct = () => {
+    const productRef = doc(db, "Products", `${product?.id}`);
+    firebaserServices
+      .deleteProduct(productRef)
+      .then((res) => {
+        console.log("res", res);
+        navigate("/products/all");
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   };
 
   return (
@@ -123,6 +141,9 @@ const Product = () => {
               </div>
               <div className={classes.row}>
                 <Button type="submit">{isEditMode ? "Update" : "Edit"}</Button>
+                <Button type="button" onClick={deleteProduct}>
+                  Delete
+                </Button>
               </div>
             </div>
           </Form>

@@ -1,6 +1,6 @@
 import {  signInWithEmailAndPassword } from "firebase/auth";
 import useFirebase from "../../utils/hooks/useFirebase";
-import { addDoc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, deleteDoc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 
 const login = (params: any) => {
     const {auth, email, password} = params;
@@ -23,10 +23,15 @@ const updateProduct = (productRef: any, values: any) => {
     return updateDoc(productRef, values);
 }
 
+const deleteProduct = (productRef: any) => {
+    return deleteDoc(productRef);
+}
+
 export const firebaserServices = {
  login,
  getAllProducts,
  addProduct,
  getProduct,
- updateProduct
+ updateProduct,
+ deleteProduct
 }
