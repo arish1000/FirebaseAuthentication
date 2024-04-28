@@ -10,13 +10,12 @@
 
   .card_main {
     width: 300px;
-    height: 400px;
     background-color: whitesmoke;
     border: 1px solid whitesmoke;
     box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     justify-content: flex-start;
     align-items: center;
     padding: 20px;
@@ -29,6 +28,20 @@
       }
     }
 
+    .name_input_container {
+      width: 100%;
+      display: flex;
+      gap: 5px;
+
+      .first_name {
+        width: 50%;
+      }
+
+      .last_name {
+        width: 50%;
+      }
+    }
+
     .email_input_container {
       width: 100%;
     }
@@ -37,23 +50,24 @@
       width: 100%;
     }
 
-    .login_btn_container {
+    .signup_btn_container {
       width: 100%;
       display: flex;
       justify-content: center;
 
-      .login_btn {
+      .signup_btn {
         padding: 8px 30px;
       }
     }
 
-    .noaccount_text {
+    .have_account {
       font-family: $font-family-inter;
       font-size: 12px;
       font-weight: 400;
       text-decoration: underline;
       color: goldenrod;
       cursor: pointer;
+      margin-top: 10px;
     }
   }
 }

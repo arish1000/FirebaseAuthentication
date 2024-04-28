@@ -8,11 +8,17 @@ import * as Yup from "yup";
 import useFirebase from "../../utils/hooks/useFirebase";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserAsync } from "../../redux/actions/user.action";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { isLoading } = useSelector((state: any) => state?.root?.user);
   const { auth } = useFirebase();
   const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
+
+  const goToSignUpPage = () => {
+    navigate("/signup");
+  };
 
   return (
     <Formik
@@ -62,6 +68,7 @@ const Login = () => {
                   <Input
                     name="password"
                     type="password"
+                    placeholder="Password"
                     value={values?.password}
                     onChange={(e: any) => {
                       setFieldValue("password", e.target.value);
@@ -74,6 +81,12 @@ const Login = () => {
                   <Button rootClassName={classes.login_btn} type="submit">
                     {isLoading ? "Logging in..." : "Login"}
                   </Button>
+                </div>
+                <div
+                  className={classes.noaccount_text}
+                  onClick={goToSignUpPage}
+                >
+                  I don't have an account
                 </div>
               </div>
             </div>
